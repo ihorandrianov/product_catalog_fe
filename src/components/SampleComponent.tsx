@@ -1,6 +1,8 @@
-import { FC, useEffect } from 'react';
+import { Phones } from '@prisma/client';
+import { FC, Fragment, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { trpc } from '../utils/trpc';
+import { ProductCard } from './ProductCard';
 export const SampleComponent: FC = () => {
   const [ref, inView] = useInView();
   const query = trpc.products.getAll.useInfiniteQuery(
@@ -25,7 +27,15 @@ export const SampleComponent: FC = () => {
 
   return (
     <div>
-      <div>{JSON.stringify(query.data)}</div>
+      <div>
+        {query.data?.pages.map((page) => (
+          <Fragment key={page.items[0].id}>
+            {page.items.map((product: Phones) => (
+              <ProductCard product={product} key={product.id} />
+            ))}
+          </Fragment>
+        ))}
+      </div>
       <button
         ref={ref}
         className="button"

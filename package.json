@@ -9,6 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^4.7.0",
+    "@tanstack/react-query": "^4.18.0",
+    "@trpc/client": "^10.4.1",
+    "@trpc/next": "^10.4.1",
+    "@trpc/react-query": "^10.4.1",
+    "@trpc/server": "^10.4.1",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
@@ -17,9 +23,13 @@
     "eslint-config-next": "13.0.5",
     "next": "13.0.5",
     "node-sass": "^8.0.0",
+    "prisma": "^4.7.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "4.9.3"
+    "react-intersection-observer": "^9.4.1",
+    "superjson": "^1.11.0",
+    "typescript": "4.9.3",
+    "zod": "^3.19.1"
   },
   "devDependencies": {
     "eslint-config-prettier": "^8.5.0",

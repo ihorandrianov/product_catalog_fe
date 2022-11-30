@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Phones {
+  id        Int    @id
+  category  String
+  phoneId   String
+  itemId    String
+  name      String
+  fullPrice Int
+  price     Int
+  screen    String
+  capacity  String
+  color     String
+  ram       String
+  year      Int
+  image     String
+}

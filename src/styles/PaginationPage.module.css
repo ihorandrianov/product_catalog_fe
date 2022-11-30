@@ -1,0 +1,20 @@
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  row-gap: 40px;
+  gap: 16px;
+  margin: 0 auto;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.titleSection {
+  display: flex;
+  flex-direction: column;
+  margin: 0 152px;
+}

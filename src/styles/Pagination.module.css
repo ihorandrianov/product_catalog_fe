@@ -1,0 +1,55 @@
+.pageButton {
+  border-radius: 50%;
+  border: 1px solid #e2e6e9;
+  width: 32px;
+  color: #0f0f11;
+  background-color: #e2e6e9;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition-duration: 500ms;
+  transition-property: scale;
+}
+
+.navButton {
+  border-radius: 50%;
+  border: 1px solid #b4bdc4;
+  color: #0f0f11;
+  background-color: #e2e6e9;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition-duration: 500ms;
+  transition-property: scale;
+}
+
+.navButton:disabled {
+  scale: 80%;
+  cursor: not-allowed;
+}
+
+.pageButton:hover {
+  scale: 110%;
+}
+
+.selectedButton {
+  background: #0f0f11;
+  color: #e2e6e9;
+  border-radius: 50%;
+  border: 1px solid #e2e6e9;
+  padding: 2px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.buttonsWrapper {
+  display: flex;
+  gap: 3px;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}

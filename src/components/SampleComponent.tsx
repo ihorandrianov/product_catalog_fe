@@ -25,6 +25,8 @@ export const SampleComponent: FC = () => {
     return <p>Loading</p>;
   }
 
+  console.log(query.data);
+
   return (
     <div>
       <div>

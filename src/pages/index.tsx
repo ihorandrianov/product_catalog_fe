@@ -1,3 +1,5 @@
+import { PaginationPage } from '../components/PaginationPage';
+
 export default function Home() {
-  return <button className="button">Click</button>;
+  return <PaginationPage />;
 }

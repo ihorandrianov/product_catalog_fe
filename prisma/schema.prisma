@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgres://chat_app_00im_user:UOCtkgOXZEmgA5Z0cvj0b5CebcL9Zgid@dpg-cdpbtuien0ho5gut5hog-a.frankfurt-postgres.render.com/chat_app_00im"
+  url      = env("DATABASE_URL")
 }
 
 model Phones {

@@ -1,4 +1,6 @@
 .card {
+  box-sizing: border-box;
+  padding: 32px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,4 +9,18 @@
   border-radius: 8px;
   width: 272px;
   height: 506px;
+}
+
+.card__image {
+  display: block;
+  height: 208px;
+  width: 196px;
+}
+
+.card__title {
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--color-primary);
 }

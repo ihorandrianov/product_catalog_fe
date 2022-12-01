@@ -1,6 +1,6 @@
 .productsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  flex-direction: column;
   row-gap: 40px;
   gap: 16px;
   margin: 0 auto;
@@ -16,5 +16,78 @@
 .titleSection {
   display: flex;
   flex-direction: column;
-  margin: 0 152px;
+  margin: 0 11vw;
+}
+
+.selectorGroup {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-shrink: 0;
+}
+
+.selector {
+  display: flex;
+  flex-direction: column;
+}
+
+.select {
+  border: 1px solid #b4bdc4;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+  color: #0f0f11;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1em;
+}
+
+.titleFont {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 56px;
+  color: #0f0f11;
+  margin-bottom: 8px;
+}
+
+.modelsCount {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  color: #89939a;
+  margin-bottom: 40px;
+}
+
+.selectorLabel {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  color: #89939a;
+}
+
+@media (min-width: 640px) {
+  .productsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .titleSection {
+    margin: 0 10vw;
+  }
+}
+
+@media (min-width: 768px) {
+  .productsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .productsGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }

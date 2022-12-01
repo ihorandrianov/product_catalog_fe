@@ -25,7 +25,7 @@ export const Pagination: FC<Props> = ({
           onClick={() => selectPage('prev')}
           disabled={selectedPage === FIRST_PAGE}
         >
-          p
+          &lt;
         </button>
         {pages &&
           pages.map((page: number) => (
@@ -48,7 +48,7 @@ export const Pagination: FC<Props> = ({
           className={styles.navButton}
           disabled={selectedPage === pages.length}
         >
-          n
+          &gt;
         </button>
       </div>
     </div>

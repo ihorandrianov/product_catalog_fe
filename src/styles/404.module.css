@@ -1,0 +1,13 @@
+.position {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 100px;
+    font-size: large;
+    text-transform: uppercase;
+}
+
+.logo {
+    margin: 50px;
+}

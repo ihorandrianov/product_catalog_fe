@@ -3,8 +3,6 @@ import type { AppProps } from 'next/app';
 import 'bulma/css/bulma.css';
 import { trpc } from '../utils/trpc';
 import localFont from '@next/font/local';
-import { ReactElement, ReactNode } from 'react';
-import { NextPage } from 'next/types';
 
 const mont = localFont({
   src: [
@@ -26,20 +24,11 @@ const mont = localFont({
   ],
 });
 
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode;
-};
-
-type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
-};
-
-function App({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout ?? ((page) => page);
-  return getLayout(
+function App({ Component, pageProps }: AppProps) {
+  return (
     <main className={mont.className}>
       <Component {...pageProps} />
-    </main>,
+    </main>
   );
 }
 

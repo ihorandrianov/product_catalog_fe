@@ -1,14 +1,14 @@
-import { NextPage } from 'next';
 import { Footer } from '../../components/Footer';
+import Header from '../../components/Header';
 import { PaginationPage } from '../../components/PaginationPage';
-import { SampleComponent } from '../../components/SampleComponent';
 
 function Phones({}) {
   return (
-    <div>
+    <>
+      <Header />
       <PaginationPage />
       <Footer />
-    </div>
+    </>
   );
 }
 

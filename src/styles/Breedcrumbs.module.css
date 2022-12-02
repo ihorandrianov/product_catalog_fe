@@ -1,0 +1,16 @@
+.list {
+  display: flex;
+  gap: 14px;
+  padding: 24px;
+  align-items: center;
+}
+
+.stroke {
+  margin-right: 12px;
+}
+
+.listItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

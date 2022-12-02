@@ -5,6 +5,8 @@ import { ProductCard } from './ProductCard';
 import styles from '../styles/PaginationPage.module.css';
 import { useRouter } from 'next/router';
 import { Breedcrumbs } from './Breedcrumbs';
+import Link from 'next/link';
+import { getPhoneRoute } from '../utils/utilities';
 
 //TODO Add getServerSideProps() to page component
 export const PaginationPage: FC = () => {
@@ -108,7 +110,15 @@ export const PaginationPage: FC = () => {
         {(isLoading || pagesCountLoading) && <p>Loading</p>}
         {data &&
           data.map((product) => (
-            <ProductCard key={product.itemId} product={product} />
+            <Link
+              key={product.itemId}
+              href={{
+                pathname: '/phones/[id]',
+                query: getPhoneRoute(product.phoneId),
+              }}
+            >
+              <ProductCard product={product} />
+            </Link>
           ))}
       </article>
       <Pagination

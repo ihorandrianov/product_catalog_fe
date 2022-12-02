@@ -1,0 +1,117 @@
+.block {
+  display: flex;
+  flex-direction: column;
+  margin: 0 50px;
+}
+
+.name {
+  margin-bottom: 40px;
+}
+
+.infoContainer {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  gap: 76px;
+}
+
+.infoComponentLeft {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  flex-grow: 0;
+}
+
+.infoComponentRight {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  flex-grow: 0;
+}
+.colorsTitle {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-secondary);
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0;
+  margin-bottom: 8px;
+}
+
+.capacityTitle {
+  color: var(--color-secondary);
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0;
+  margin-bottom: 8px;
+}
+
+.capacityButton {
+  background-color: #fff;
+  border: 1px solid #b4bdc4;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.capacityButton:hover {
+  border-color: #000;
+}
+
+.divider {
+  width: 320px;
+  height: 1px;
+  border-bottom: 1px solid #e2e6e9;
+  margin-bottom: 32px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.cartButtonGroup {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.circleButtonInfo {
+  flex-shrink: 0;
+}
+
+.priceBlock {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.discountPrice {
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 28px;
+  text-decoration-line: line-through;
+
+  color: var(--color-secondary);
+}
+
+.specList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grayText {
+  color: var(--color-secondary);
+}

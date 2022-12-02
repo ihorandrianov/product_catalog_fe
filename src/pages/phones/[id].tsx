@@ -14,6 +14,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import PhoneInfo from '../../components/PhoneInfo';
+import Header from '../../components/Header';
 
 const isSSR = () => typeof window === 'undefined';
 
@@ -69,6 +70,7 @@ function PhonePage(props: InferGetStaticPropsType<typeof getStaticProps>) {
 
   return (
     <main>
+      <Header />
       {data && <PhoneInfo phones={data} />}
       <Footer />
     </main>

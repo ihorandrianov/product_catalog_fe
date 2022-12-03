@@ -21,3 +21,22 @@ export const getPhoneRoute = (phoneId: string) => {
     color,
   };
 };
+
+export const getIphoneColor = (color: string): string => {
+  const colorMap = new Map<string, string>([
+    ['spacegray', '#535150'],
+    ['midnightgreen', '#4E5851'],
+    ['silver', '#EBEBE3'],
+    ['rosegold', '#FAD7BD'],
+    ['purple', '#D1CDDA'],
+    ['yellow', '#FFE681'],
+    ['green', '#AEE1CD'],
+    ['black', '#1F2020'],
+    ['white', '#F9F6EF'],
+    ['red', '#BA0C2E'],
+    ['coral', '#EE7762'],
+    ['gold', '#F5DDC5'],
+  ]);
+
+  return colorMap.get(color) || 'pink';
+};

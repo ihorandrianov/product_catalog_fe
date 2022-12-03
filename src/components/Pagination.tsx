@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import styles from '../styles/Pagination.module.css';
-import { trpc } from '../utils/trpc';
 
 type Props = {
   selectedPage: number;

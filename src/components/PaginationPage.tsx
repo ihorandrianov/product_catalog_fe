@@ -1,39 +1,51 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { trpc } from '../utils/trpc';
 import { Pagination } from './Pagination';
 import { ProductCard } from './ProductCard';
 import styles from '../styles/PaginationPage.module.css';
 import { useRouter } from 'next/router';
 import { Breedcrumbs } from './Breedcrumbs';
-import Link from 'next/link';
-import { getPhoneRoute } from '../utils/utilities';
 
 //TODO Add getServerSideProps() to page component
 export const PaginationPage: FC = () => {
   const router = useRouter();
   const defaultSortBy = (router.query.sortBy as string) || 'year';
   const defaultItemPerPage = Number(router.query.items) || 16;
-  const [selectedPage, setSelectedPage] = useState(1);
+  const [selectedPage, setSelectedPage] = useState(
+    Number(router.query.page) || 1,
+  );
   const [itemsPerPage, setItemsPerPage] = useState(defaultItemPerPage);
   const [sortBy, setSortBy] = useState(defaultSortBy);
 
   const selectPage = (page: 'prev' | 'next', maxPages = 0) => {
     if (page === 'prev') {
       setSelectedPage((prev) => Math.max(prev - 1, 1));
+      router.replace({
+        query: { ...router.query, page: Number(router.query.page) - 1 },
+      });
       return;
     }
     setSelectedPage((prev) => Math.min(prev + 1, maxPages));
+    router.replace({
+      query: { ...router.query, page: Number(router.query.page) + 1 },
+    });
   };
 
   const handlePageClick = (pageNumber: number) => {
     setSelectedPage(pageNumber);
+    router.replace({
+      query: { ...router.query, page: pageNumber },
+    });
   };
 
   const itemsPerPageChange = (e: ChangeEvent<HTMLSelectElement>) => {
     if (e.target) {
       setItemsPerPage(Number(e.target.value));
       router.replace({
-        query: { ...router.query, items: e.target.value },
+        query: {
+          ...router.query,
+          items: e.target.value,
+        },
       });
     }
   };
@@ -110,15 +122,7 @@ export const PaginationPage: FC = () => {
         {(isLoading || pagesCountLoading) && <p>Loading</p>}
         {data &&
           data.map((product) => (
-            <Link
-              key={product.itemId}
-              href={{
-                pathname: '/phones/[id]',
-                query: getPhoneRoute(product.phoneId),
-              }}
-            >
-              <ProductCard product={product} />
-            </Link>
+            <ProductCard key={product.phoneId} product={product} />
           ))}
       </article>
       <Pagination

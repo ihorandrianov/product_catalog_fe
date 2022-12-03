@@ -1,8 +1,14 @@
 .list {
   display: flex;
   gap: 14px;
-  padding: 24px;
+  padding: 24px 0;
   align-items: center;
+  height: 24px;
+  margin-bottom: 41px;
+}
+
+.lastChild {
+  color: var(--color-secondary);
 }
 
 .stroke {
@@ -11,10 +17,11 @@
 
 .listItem {
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
 .link {
+  margin-bottom: -3px;
   text-transform: capitalize;
+  text-align: center;
 }

@@ -16,12 +16,12 @@
   margin: 0 auto 24px;
   height: 208px;
   width: 196px;
+  object-fit: contain;
 }
 
 .card__title {
   margin-bottom: 8px;
-  /* color: var(--color-primary); */
-  color: #0f0f11;
+  color: var(--color-primary);
 }
 
 .card__price {
@@ -34,16 +34,14 @@
 .card__priceСurrent {
   display: flex;
   justify-content: space-around;
-  /* color: var(--color-primary); */
-  color: #0f0f11;
+  color: var(--color-primary);
 }
 
 .card__priceFull {
   font-weight: 600;
   font-size: 22px;
   line-height: 28px;
-  /* color: var(--color-secondary); */
-  color: #89939a;
+  color: var(--color-secondary);
   text-decoration: line-through;
 }
 
@@ -56,8 +54,7 @@
   content: '';
   height: 1px;
   width: 100%;
-  /* background-color: var(--color-elements); */
-  background-color: #e2e6e9;
+  background-color: var(--color-elements);
   margin-bottom: 16px;
 }
 
@@ -76,16 +73,14 @@
   font-weight: 700;
   font-size: 12px;
   line-height: 15px;
-  /* color: var(--color-secondary); */
-  color: #89939a;
+  color: var(--color-secondary);
 }
 
 .card__featureValue {
   font-weight: 700;
   font-size: 12px;
   line-height: 15px;
-  /* color: var(--color-primary); */
-  color: #0f0f11;
+  color: var(--color-primary);
 }
 
 .card__buy {
@@ -95,7 +90,7 @@
 }
 
 .card__addToCart {
-  width: 160px;
+  width: full;
   height: 40px;
   display: flex;
   justify-content: center;
@@ -106,24 +101,26 @@
   font-size: 14px;
   line-height: 21px;
 
-  /* color: var(--color-white); */
-  color: #fff;
+  color: var(--color-white);
 
-  /* background: var(--color-buttons); */
-  background: #216cff;
+  background: var(--color-accent);
 
   text-decoration: none;
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: 48px;
   text-align: center;
+
+  transition-duration: 500ms;
+}
+
+.card__addToCart:hover {
+  box-shadow: 0px 3px 13px rgba(23, 32, 49, 0.4);
 }
 
 .card__addToCart:active {
-  /* background: var(--color-white); */
-  background-color: #fff;
-  /* color: var(--color-buttons); */
-  color: #216cff;
-  /* background-color: var(--color-elements); */
+  background: var(--color-white);
+  color: var(--color-buttons);
+  background-color: var(--color-elements);
   border-color: #e2e6e9;
 }
 
@@ -137,6 +134,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  border: 1px solid transparent;
+  border-radius: 48px;
+
+  transition-duration: 500ms;
+}
+
+.card__favoritesIcon:hover {
+  border-color: #000;
 }
 
 .card__favoritesIconActive {

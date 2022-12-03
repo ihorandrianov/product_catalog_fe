@@ -1,12 +1,15 @@
 import { PhoneDetails } from '@prisma/client';
 import { useRouter } from 'next/router';
 import { FC, MouseEvent, useEffect, useState } from 'react';
-import typography from '../styles/TypographyDesktop.module.css';
+import typography from '../styles/Typography.module.css';
 import infoStyles from '../styles/PhoneInfo.module.css';
 import buttons from '../styles/Buttons.module.css';
-import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
+import { PhotoGalery } from './PhotoGalery';
+import { Breedcrumbs } from './Breedcrumbs';
+import { getIphoneColor } from '../utils/utilities';
+import { TechSpecs } from './TechSpecs';
 
 type Props = {
   phones: PhoneDetails[];
@@ -14,7 +17,7 @@ type Props = {
 
 const PhoneInfo: FC<Props> = ({ phones }) => {
   const router = useRouter();
-  const [model, selectedCapacity, selectedColor] = Object.values(
+  const [_, selectedCapacity, selectedColor] = Object.values(
     router.query,
   ) as string[];
   const [selectPhone, setSelectedPhone] = useState<PhoneDetails | null>(null);
@@ -51,21 +54,19 @@ const PhoneInfo: FC<Props> = ({ phones }) => {
 
   return (
     <div className={infoStyles.block}>
-      <Link href="/phones">Back</Link>
-      <h1 className={classNames(typography.h2Desktop, infoStyles.name)}>
+      {selectPhone && <Breedcrumbs name={selectPhone.name} />}
+      <Link
+        href="/phones"
+        className={classNames(infoStyles.linkBack, typography.smallText)}
+      >
+        Back
+      </Link>
+      <h1 className={classNames(typography.h2, infoStyles.name)}>
         {selectPhone?.name}
       </h1>
       <div className={infoStyles.infoContainer}>
         <div className={infoStyles.infoComponentLeft}>
-          {selectPhone?.images.map((image) => (
-            <Image
-              key={image}
-              src={`/${image}`}
-              width={442}
-              height={442}
-              alt="phone image"
-            />
-          ))}
+          {selectPhone && <PhotoGalery photos={selectPhone.images} />}
         </div>
         <div className={infoStyles.infoComponentRight}>
           <div className={infoStyles.colorsTitle}>
@@ -74,9 +75,16 @@ const PhoneInfo: FC<Props> = ({ phones }) => {
           </div>
           <div className={infoStyles.buttonGroup}>
             {colors.map((col) => (
-              <button key={col} value={col} onClick={onSelectColor}>
-                {col}
-              </button>
+              <button
+                key={col}
+                value={col}
+                onClick={onSelectColor}
+                className={classNames(
+                  infoStyles.colorButton,
+                  router.query.color === col ? infoStyles.buttonSelected : null,
+                )}
+                style={{ backgroundColor: getIphoneColor(col) }}
+              ></button>
             ))}
           </div>
           <div className={infoStyles.divider}></div>
@@ -85,7 +93,12 @@ const PhoneInfo: FC<Props> = ({ phones }) => {
             <div className={infoStyles.buttonGroup}>
               {capacities.map((cap) => (
                 <button
-                  className={infoStyles.capacityButton}
+                  className={classNames(
+                    infoStyles.capacityButton,
+                    router.query.capacity === cap
+                      ? infoStyles.buttonSelected
+                      : null,
+                  )}
                   key={cap}
                   value={cap}
                   onClick={onSelectCapacity}
@@ -97,7 +110,7 @@ const PhoneInfo: FC<Props> = ({ phones }) => {
           </div>
           <div className={infoStyles.divider}></div>
           <div className={infoStyles.priceBlock}>
-            <div className={typography.h2Desktop}>
+            <div className={typography.h2}>
               {`$${selectPhone?.priceDiscount}`}
             </div>
             <div className={infoStyles.discountPrice}>
@@ -105,15 +118,13 @@ const PhoneInfo: FC<Props> = ({ phones }) => {
             </div>
           </div>
           <div className={infoStyles.cartButtonGroup}>
-            <button className={buttons.primaryButton}>Primary</button>
+            <button className={buttons.primaryButton}>Add to cart</button>
             <button
               className={classNames(
                 buttons.circleButton,
                 infoStyles.circleButtonInfo,
               )}
-            >
-              o
-            </button>
+            ></button>
           </div>
           <div>
             <ul className={infoStyles.specList}>
@@ -167,8 +178,12 @@ const PhoneInfo: FC<Props> = ({ phones }) => {
           </div>
         </div>
       </div>
-
-      {JSON.stringify(selectPhone)}
+      <div className={infoStyles.additionalContainer}>
+        <div className={infoStyles.about}></div>
+        <div className={infoStyles.specs}>
+          {selectPhone && <TechSpecs phone={selectPhone} />}
+        </div>
+      </div>
     </div>
   );
 };

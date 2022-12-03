@@ -1,6 +1,6 @@
 import '../styles/globals.css';
+import '../styles/reset.css';
 import type { AppProps } from 'next/app';
-import 'bulma/css/bulma.css';
 import { trpc } from '../utils/trpc';
 import localFont from '@next/font/local';
 

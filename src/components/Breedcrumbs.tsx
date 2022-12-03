@@ -5,6 +5,8 @@ import { FC } from 'react';
 import strokeRight from '../../public/icons/Stroke-right.svg';
 import home from '../../public/icons/Home.svg';
 import styles from '../styles/Breedcrumbs.module.css';
+import typography from '../styles/Typography.module.css';
+import classNames from 'classnames';
 
 type Props = {
   name?: string | undefined;
@@ -16,7 +18,10 @@ export const Breedcrumbs: FC<Props> = ({ name = '' }) => {
   return (
     <ul className={styles.list}>
       <li>
-        <Link className={styles.listItem} href="/">
+        <Link
+          className={classNames(styles.listItem, typography.smallText)}
+          href="/"
+        >
           <Image src={home} alt="home icon" width={16} height={16} />
         </Link>
       </li>
@@ -26,7 +31,10 @@ export const Breedcrumbs: FC<Props> = ({ name = '' }) => {
             location = name;
           }
           return (
-            <li key={location}>
+            <li
+              className={classNames(styles.listItem, typography.smallText)}
+              key={location}
+            >
               <Image
                 className={styles.stroke}
                 src={strokeRight}
@@ -35,8 +43,11 @@ export const Breedcrumbs: FC<Props> = ({ name = '' }) => {
                 height={10}
               />
               <Link
-                className={styles.link}
-                href={`/${locations[index + 1] ? location : router.asPath}`}
+                className={classNames(
+                  styles.link,
+                  locations.length - index === 1 ? styles.lastChild : null,
+                )}
+                href={locations[index + 1] ? `/${location}` : router.asPath}
               >
                 {location}
               </Link>

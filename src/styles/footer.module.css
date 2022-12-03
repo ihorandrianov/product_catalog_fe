@@ -70,13 +70,14 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: baseline;
-    height: 100vh;
+    height: auto;
     padding: 16px;
   }
 
   .footer_inside {
     flex-direction: column;
     align-items: baseline;
+    gap: 16px;
   }
 
   .footer_button_container {

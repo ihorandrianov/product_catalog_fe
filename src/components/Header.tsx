@@ -23,7 +23,7 @@ export default function Header() {
     <>
       {isOpen && (
         <main className={styles.menu__page}>
-          <div className={styles.header}>
+          <div className={styles.header__menu}>
             <Link href="#home" className={styles.link__img}>
               <Image className={styles.img__logo} src={Logo} alt="Logo" />
             </Link>

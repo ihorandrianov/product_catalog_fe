@@ -126,6 +126,7 @@ export const ProductCard: FC<Props> = ({ product }) => {
         </button>
 
         <button
+          aria-label="add to favorites"
           onClick={() => {
             setFavorite(!favorite);
           }}

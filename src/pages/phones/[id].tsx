@@ -8,16 +8,11 @@ import { appRouter } from '../../server/routers/_app';
 import superjson from 'superjson';
 import { prisma } from '../../server/prisma';
 import { trpc } from '../../utils/trpc';
-import { Breedcrumbs } from '../../components/Breedcrumbs';
 import { Footer } from '../../components/Footer';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import dynamic from 'next/dynamic';
 import PhoneInfo from '../../components/PhoneInfo';
 import Header from '../../components/Header';
 import { Recomended } from '../../components/Recomended';
-
-const isSSR = () => typeof window === 'undefined';
+import Head from 'next/head';
 
 export async function getStaticProps(
   context: GetStaticPropsContext<{
@@ -61,21 +56,26 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 function PhonePage(props: InferGetStaticPropsType<typeof getStaticProps>) {
   const { id } = props;
-  const { data, isLoading } = trpc.details.getByModel.useQuery({
+  const modelsQuery = trpc.details.getByModel.useQuery({
     id,
   });
 
-  if (isLoading) {
+  if (modelsQuery.status !== 'success') {
     return <>Loading</>;
   }
-
+  const { data } = modelsQuery;
   return (
-    <main>
+    <>
+      <Head>
+        <title>{data[0].name}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="description" content="Main page of NiceGadgets" />
+      </Head>
       <Header />
-      {data && <PhoneInfo phones={data} />}
+      <PhoneInfo phones={data} />
       <Recomended />
       <Footer />
-    </main>
+    </>
   );
 }
 

@@ -48,6 +48,7 @@ export const Recomended = () => {
         <h1 className={typography.h2}>You may also like</h1>
         <div className={styles.buttonGroup}>
           <button
+            aria-label="prev slide"
             onClick={onSlideLeft}
             ref={leftButton}
             className={styles.button}
@@ -71,6 +72,7 @@ export const Recomended = () => {
             onClick={onSlideRight}
             ref={rightButton}
             className={styles.button}
+            aria-label="next button"
           >
             <svg
               width="6"

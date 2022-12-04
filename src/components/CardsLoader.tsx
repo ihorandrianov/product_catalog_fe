@@ -17,7 +17,6 @@ const ImageGrid = () => (
       style={{
         left: '10px',
         top: '50px',
-        border: '1px solid black',
       }}
     >
       <rect x="24" y="12" rx="2" ry="2" width="140" height="10" />

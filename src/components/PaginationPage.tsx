@@ -5,6 +5,7 @@ import { ProductCard } from './ProductCard';
 import styles from '../styles/PaginationPage.module.css';
 import { useRouter } from 'next/router';
 import { Breedcrumbs } from './Breedcrumbs';
+import ImageGrid from './CardsLoader';
 
 //TODO Add getServerSideProps() to page component
 export const PaginationPage: FC = () => {
@@ -69,7 +70,7 @@ export const PaginationPage: FC = () => {
   });
 
   if (pagesCountLoading) {
-    return <p>Loading</p>;
+    return <ImageGrid />;
   }
 
   const pagesCount = Math.floor(itemsCount!._all / itemsPerPage) + 1;

@@ -22,3 +22,24 @@ model Phones {
   year      Int
   image     String
 }
+
+model PhoneDetails {
+  id                    String    @unique
+  namespaceId           String  
+  name                  String
+  capacityAvailable     String[] 
+  capacity              String
+  priceRegular          Int
+  priceDiscount         Int
+  colorsAvailable       String[]
+  color                 String
+  images                String[]
+  description           Json[] 
+  screen                String
+  resolution            String
+  processor             String
+  ram                   String
+  camera                String
+  zoom                  String
+  cell                  String[]
+}

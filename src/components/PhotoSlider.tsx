@@ -41,6 +41,7 @@ export const PhotoSlider: FC<Props> = ({ photos }) => {
                 width={80}
                 height={80}
                 className={styles.img}
+                placeholder="empty"
               />
             </button>
           ))}
@@ -63,7 +64,12 @@ export const PhotoSlider: FC<Props> = ({ photos }) => {
                   src={`/${photo}`}
                   alt="phone"
                   fill
+                  sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
                   className={styles.img}
+                  placeholder="empty"
+                  priority
                 />
               </div>
             </SwiperSlide>

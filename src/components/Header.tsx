@@ -28,9 +28,9 @@ export default function Header() {
               <Image className={styles.img__logo} src={Logo} alt="Logo" />
             </Link>
             <div className={styles.menu}>
-              <Link href="/" onClick={closeMenu} className={styles.link__nav}>
+              <button onClick={closeMenu} className={styles.link__nav}>
                 <Image className={styles.img} src={Close} alt="shopping" />
-              </Link>
+              </button>
             </div>
           </div>
           <div className={styles.content__nav__menu}>
@@ -113,9 +113,9 @@ export default function Header() {
           </Link>
         </div>
         <div className={styles.menu}>
-          <Link href="#" onClick={openMenu} className={styles.link__nav}>
+          <button onClick={openMenu} className={styles.link__nav}>
             <Image className={styles.img} src={Open} alt="shopping" />
-          </Link>
+          </button>
         </div>
       </header>
     </>

@@ -13,6 +13,7 @@ import PhoneInfo from '../../components/PhoneInfo';
 import Header from '../../components/Header';
 import { Recomended } from '../../components/Recomended';
 import Head from 'next/head';
+import { createContextInner } from '../../server/context';
 
 export async function getStaticProps(
   context: GetStaticPropsContext<{
@@ -21,7 +22,7 @@ export async function getStaticProps(
 ) {
   const ssg = await createProxySSGHelpers({
     router: appRouter,
-    ctx: {},
+    ctx: await createContextInner(),
     transformer: superjson,
   });
   const id = context.params?.id as string;

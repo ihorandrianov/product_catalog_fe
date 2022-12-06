@@ -24,7 +24,7 @@ model Phones {
   year      Int
   image     String
   cartItems CartItem[]
-  favorites Favorites[]
+  users UserFavorites[]
 }
 
 model PhoneDetails {
@@ -49,27 +49,26 @@ model PhoneDetails {
 }
 
 
-model Cart {
-  id         Int @id @default(autoincrement())
-  userId     String @unique
-  user       User   @relation(fields: [userId], references: [id])
-  cartItems   CartItem[]
-}
 
 model CartItem {
-  id       Int @id @default(autoincrement())
-  cartId   Int
-  cart     Cart  @relation(fields: [cartId], references: [id])
-  itemId   String
-  item     Phones @relation(fields: [itemId], references: [phoneId])
+  userId   String
+  user      User  @relation(fields: [userId], references: [id])
+  phoneId   String
+  phone    Phones @relation(fields: [phoneId], references: [phoneId])
   quantity Int?
+  assignedAt DateTime @default(now())
+  
+  @@id([userId, phoneId])
 }
 
-model Favorites {
-  id                 Int        @id @default(autoincrement())
-  userId             String        @unique
-  items              Phones[]
-  user               User       @relation(fields: [userId], references: [id])
+model UserFavorites {
+  user        User @relation(fields: [userId], references: [id])
+  userId      String
+  phone       Phones @relation(fields: [phoneId], references: [phoneId])
+  phoneId     String
+  assignedAt DateTime @default(now())
+  
+  @@id([userId, phoneId])
 }
 
 
@@ -107,9 +106,8 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
-  cart          Cart?   
-  favoritesId   Int?        @unique
-  favorites     Favorites?  
+  cart          CartItem[]
+  favorites     UserFavorites[]  
   accounts      Account[]
   sessions      Session[]
 }

@@ -25,24 +25,26 @@ export const PhotoSlider: FC<Props> = ({ photos }) => {
       <div>
         <ul className={styles.buttonContainer}>
           {photos.map((photo, index) => (
-            <button
-              className={classNames(
-                styles.button,
-                index === selectedSlide ? styles.selectedButton : null,
-              )}
-              key={photo}
-              onClick={() => {
-                handleClick(index);
-              }}
-            >
-              <Image
-                src={`/${photo}`}
-                alt="phone"
-                width={80}
-                height={80}
-                className={styles.img}
-              />
-            </button>
+            <li key={photo}>
+              <button
+                className={classNames(
+                  styles.button,
+                  index === selectedSlide ? styles.selectedButton : null,
+                )}
+                onClick={() => {
+                  handleClick(index);
+                }}
+              >
+                <Image
+                  src={`/${photo}`}
+                  alt="phone"
+                  width={80}
+                  height={80}
+                  className={styles.img}
+                  placeholder="empty"
+                />
+              </button>
+            </li>
           ))}
         </ul>
       </div>
@@ -63,7 +65,12 @@ export const PhotoSlider: FC<Props> = ({ photos }) => {
                   src={`/${photo}`}
                   alt="phone"
                   fill
+                  sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
                   className={styles.img}
+                  placeholder="empty"
+                  priority
                 />
               </div>
             </SwiperSlide>

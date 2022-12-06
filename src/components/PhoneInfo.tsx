@@ -10,6 +10,7 @@ import { PhotoGalery } from './PhotoGalery';
 import { Breedcrumbs } from './Breedcrumbs';
 import { getIphoneColor } from '../utils/utilities';
 import { TechSpecs } from './TechSpecs';
+import { PhoneInfoAbout } from './PhoneInfoAbout';
 
 type Props = {
   phones: PhoneDetails[];
@@ -179,7 +180,9 @@ const PhoneInfo: FC<Props> = ({ phones }) => {
         </div>
       </div>
       <div className={infoStyles.additionalContainer}>
-        <div className={infoStyles.about}></div>
+        <div className={infoStyles.about}>
+          {selectPhone && <PhoneInfoAbout phone={selectPhone} />}
+        </div>
         <div className={infoStyles.specs}>
           {selectPhone && <TechSpecs phone={selectPhone} />}
         </div>

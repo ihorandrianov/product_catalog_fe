@@ -162,7 +162,7 @@
 }
 
 .additionalContainer {
-  display: flex;
+  display: flex; 
   justify-content: center;
   gap: 64px;
 }
@@ -173,7 +173,6 @@
 
 .about {
   width: 50%;
-  height: 300px;
 }
 
 @media (min-width: 1024px) {

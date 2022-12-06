@@ -44,7 +44,9 @@ export const ProductCard: FC<Props> = ({ product }) => {
           {`$${product.price}`}
         </span>
 
-        <span className={`${productStyles.card__priceFull} ${typography.h3}`}>
+        <span
+          className={classNames(productStyles.card__priceFull, typography.h3)}
+        >
           {`$${product.fullPrice}`}
         </span>
       </p>
@@ -52,30 +54,60 @@ export const ProductCard: FC<Props> = ({ product }) => {
       <div className={productStyles.card__features}>
         <p className={productStyles.card__feature}>
           <span
-            className={`${productStyles.card__featureName} ${typography.smallText}`}
+            className={classNames(
+              productStyles.card__featureName,
+              typography.smallText,
+            )}
           >
             Screen
           </span>
 
           <span
-            className={`${productStyles.card__featureValue} ${typography.smallText}`}
+            className={classNames(
+              productStyles.card__featureValue,
+              typography.smallText,
+            )}
           >
             {product.screen}
           </span>
         </p>
 
         <p className={productStyles.card__feature}>
-          <span className={productStyles.card__featureName}>Capacity</span>
+          <span
+            className={classNames(
+              productStyles.card__featureName,
+              typography.smallText,
+            )}
+          >
+            Capacity
+          </span>
 
-          <span className={productStyles.card__featureValue}>
+          <span
+            className={classNames(
+              productStyles.card__featureValue,
+              typography.smallText,
+            )}
+          >
             {product.capacity}
           </span>
         </p>
 
         <p className={productStyles.card__feature}>
-          <span className={productStyles.card__featureName}>RAM</span>
+          <span
+            className={classNames(
+              productStyles.card__featureName,
+              typography.smallText,
+            )}
+          >
+            RAM
+          </span>
 
-          <span className={productStyles.card__featureValue}>
+          <span
+            className={classNames(
+              productStyles.card__featureValue,
+              typography.smallText,
+            )}
+          >
             {product.ram}
           </span>
         </p>
@@ -94,6 +126,7 @@ export const ProductCard: FC<Props> = ({ product }) => {
         </button>
 
         <button
+          aria-label="add to favorites"
           onClick={() => {
             setFavorite(!favorite);
           }}

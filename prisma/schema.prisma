@@ -24,6 +24,7 @@ model Phones {
   year      Int
   image     String
   cartItems CartItem[]
+  favorites Favorites[]
 }
 
 model PhoneDetails {
@@ -64,6 +65,13 @@ model CartItem {
   quantity Int?
 }
 
+model Favorites {
+  id                 Int        @id @default(autoincrement())
+  userId             String        @unique
+  items              Phones[]
+  user               User       @relation(fields: [userId], references: [id])
+}
+
 
 
 model Account {
@@ -100,6 +108,8 @@ model User {
   emailVerified DateTime?
   image         String?
   cart          Cart?   
+  favoritesId   Int?        @unique
+  favorites     Favorites?  
   accounts      Account[]
   sessions      Session[]
 }

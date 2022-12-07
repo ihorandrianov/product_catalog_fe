@@ -9,6 +9,12 @@ const getBaseUrl = () => {
   return `http://localhost:${process.env.PORT ?? 3000}`; // dev SSR should use localhost
 };
 
+export const getFavouritesPhones = async(phoneIds: string) => {
+  const response = await fetch(`${getBaseUrl()}/${phoneIds}`);
+
+  return response.json();
+};
+
 export const trpc = createTRPCNext<AppRouter>({
   config({ ctx }) {
     return {

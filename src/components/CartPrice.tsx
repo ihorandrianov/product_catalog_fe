@@ -1,10 +1,11 @@
 import { FC } from "react";
+import { trpc } from '../utils/trpc';
 import styles from '../styles/CartPrice.module.css';
 import fonts from '../styles/Typography.module.css';
-import phones from '../../seeding_material/db.json';
 
 export const CartPrice: FC = () => {
-  const totalPrice = phones.map(phone => phone.price).reduce((acc, curr) => acc + curr);
+  const { data } = trpc.products.getAll.useQuery();
+  const totalPrice = data?.items.map(phone => phone.price).reduce((acc, curr) => acc + curr);
 
   return (
     <div className={styles.price}>
@@ -13,7 +14,7 @@ export const CartPrice: FC = () => {
       </p>
 
       <p className={`${styles.count} ${fonts.bodyText}`}>
-        {`Total for ${phones.length} items`}
+        {`Total for ${data?.items.length} items`}
       </p>
 
       <div className={styles.button_container}>

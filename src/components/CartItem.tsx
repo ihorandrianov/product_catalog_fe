@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { trpc } from '../utils/trpc';
 import { Phones } from "@prisma/client";
 import Image from 'next/image';
 import Link from 'next/link';

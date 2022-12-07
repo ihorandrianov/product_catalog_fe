@@ -6,6 +6,9 @@ import productStyles from '../styles/ProductCard.module.css';
 import typography from '../styles/Typography.module.css';
 import Link from 'next/link';
 import { getPhoneRoute } from '../utils/utilities';
+import { trpc } from '../utils/trpc';
+import { useSession } from 'next-auth/react';
+
 
 type Props = {
   product: Phones;
@@ -14,6 +17,16 @@ type Props = {
 export const ProductCard: FC<Props> = ({ product }) => {
   const [added, setAdded] = useState(false);
   const [favorite, setFavorite] = useState(false);
+
+  const addFavoriteMutation = trpc.favourites.addNewFavorite.useMutation();
+
+  const addFavorite = (phoneId: string) => {
+    addFavoriteMutation.mutate(phoneId);
+  };
+
+  const { data: session } = useSession();
+
+  console.log(session);
 
   return (
     <div className={productStyles.card}>
@@ -129,6 +142,7 @@ export const ProductCard: FC<Props> = ({ product }) => {
           aria-label="add to favorites"
           onClick={() => {
             setFavorite(!favorite);
+            addFavorite(product.phoneId);
           }}
           className={classNames(`${productStyles.card__favoritesIcon}`, {
             card__favoritesIconActive: favorite,

@@ -7,9 +7,11 @@ import Close from '../../public/img/header_img/close.svg';
 import Open from '../../public/img/header_img/menu.svg';
 import Link from 'next/link';
 import { useState } from 'react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { data: session } = useSession();
 
   const openMenu = () => {
     setIsOpen(true);
@@ -28,9 +30,9 @@ export default function Header() {
               <Image className={styles.img__logo} src={Logo} alt="Logo" />
             </Link>
             <div className={styles.menu}>
-              <Link href="/" onClick={closeMenu} className={styles.link__nav}>
+              <button onClick={closeMenu} className={styles.link__nav}>
                 <Image className={styles.img} src={Close} alt="shopping" />
-              </Link>
+              </button>
             </div>
           </div>
           <div className={styles.content__nav__menu}>
@@ -79,7 +81,7 @@ export default function Header() {
         <div className={styles.content__nav}>
           <ul className={styles.list}>
             <li className={styles.list__item}>
-              <Link href="/home" className={styles.list__link}>
+              <Link href="/" className={styles.list__link}>
                 home
               </Link>
             </li>
@@ -103,19 +105,38 @@ export default function Header() {
             </li>
           </ul>
         </div>
+        {session ? (
+          <div className={styles.content__link}>
+            <Link href="/favourites" className={styles.link__nav}>
+              <Image className={styles.img} src={Fav} alt="favourites" />
+            </Link>
+            <Link href="/shopping" className={styles.link__nav}>
+              <Image className={styles.img} src={Shopping} alt="shopping" />
+            </Link>
+            <button
+              style={{ marginRight: '10px' }}
+              onClick={() => signOut()}
+              className={styles.list__link}
+            >
+              Log out
+            </button>
+          </div>
+        ) : (
+          <div className={styles.content__link}>
+            <button
+              style={{ marginRight: '10px' }}
+              onClick={() => signIn()}
+              className={styles.list__link}
+            >
+              Sign in
+            </button>
+          </div>
+        )}
 
-        <div className={styles.content__link}>
-          <Link href="/favourites" className={styles.link__nav}>
-            <Image className={styles.img} src={Fav} alt="favourites" />
-          </Link>
-          <Link href="/shopping" className={styles.link__nav}>
-            <Image className={styles.img} src={Shopping} alt="shopping" />
-          </Link>
-        </div>
         <div className={styles.menu}>
-          <Link href="#" onClick={openMenu} className={styles.link__nav}>
+          <button onClick={openMenu} className={styles.link__nav}>
             <Image className={styles.img} src={Open} alt="shopping" />
-          </Link>
+          </button>
         </div>
       </header>
     </>

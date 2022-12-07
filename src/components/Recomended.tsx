@@ -5,10 +5,15 @@ import { ProductCard } from './ProductCard';
 import styles from '../styles/Recomended.module.css';
 import typography from '../styles/Typography.module.css';
 import 'swiper/css';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-export const Recomended = () => {
-  const { data, isLoading } = trpc.products.getRecomended.useQuery();
+type Props = {
+  title: string,
+  order: string,
+}
+
+export const Recomended: React.FC<Props> = ({ title, order }) => {
+  const { data, isLoading } = trpc.products.getRecomended.useQuery(order);
   const leftButton = useRef<HTMLButtonElement>(null);
   const rightButton = useRef<HTMLButtonElement>(null);
   const swiper = useRef<SwiperRef>(null);
@@ -45,9 +50,10 @@ export const Recomended = () => {
   return (
     <section className={styles.block}>
       <div className={styles.title}>
-        <h1 className={typography.h2}>You may also like</h1>
+        <h1 className={typography.h2}>{title}</h1>
         <div className={styles.buttonGroup}>
           <button
+            aria-label="prev slide"
             onClick={onSlideLeft}
             ref={leftButton}
             className={styles.button}
@@ -71,6 +77,7 @@ export const Recomended = () => {
             onClick={onSlideRight}
             ref={rightButton}
             className={styles.button}
+            aria-label="next button"
           >
             <svg
               width="6"

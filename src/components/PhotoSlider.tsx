@@ -25,25 +25,26 @@ export const PhotoSlider: FC<Props> = ({ photos }) => {
       <div>
         <ul className={styles.buttonContainer}>
           {photos.map((photo, index) => (
-            <button
-              className={classNames(
-                styles.button,
-                index === selectedSlide ? styles.selectedButton : null,
-              )}
-              key={photo}
-              onClick={() => {
-                handleClick(index);
-              }}
-            >
-              <Image
-                src={`/${photo}`}
-                alt="phone"
-                width={80}
-                height={80}
-                className={styles.img}
-                placeholder="empty"
-              />
-            </button>
+            <li key={photo}>
+              <button
+                className={classNames(
+                  styles.button,
+                  index === selectedSlide ? styles.selectedButton : null,
+                )}
+                onClick={() => {
+                  handleClick(index);
+                }}
+              >
+                <Image
+                  src={`/${photo}`}
+                  alt="phone"
+                  width={80}
+                  height={80}
+                  className={styles.img}
+                  placeholder="empty"
+                />
+              </button>
+            </li>
           ))}
         </ul>
       </div>

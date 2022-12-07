@@ -38,9 +38,12 @@ export const favouritesRouter = router({
     .mutation(async ({ ctx, input }) => {
         const id = ctx.session.user.id;
         
-        await ctx.prisma.userFavorites.delete({
+        await prisma.userFavorites.delete({
             where: {
-              phoneId: input,  
+                userId_phoneId: {
+                    userId: id,
+                    phoneId: input,
+                },  
             }
         });
     }),

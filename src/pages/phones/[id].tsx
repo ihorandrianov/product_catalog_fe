@@ -74,7 +74,7 @@ function PhonePage(props: InferGetStaticPropsType<typeof getStaticProps>) {
       </Head>
       <Header />
       <PhoneInfo phones={data} />
-      <Recomended />
+      <Recomended title="You may also like" order="recomended" />
       <Footer />
     </>
   );

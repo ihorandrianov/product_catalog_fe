@@ -9,7 +9,6 @@ import { getPhoneRoute } from '../utils/utilities';
 import { trpc } from '../utils/trpc';
 import { useSession } from 'next-auth/react';
 
-
 type Props = {
   product: Phones;
 };
@@ -22,11 +21,10 @@ export const ProductCard: FC<Props> = ({ product }) => {
 
   const addFavorite = (phoneId: string) => {
     addFavoriteMutation.mutate(phoneId);
+    console.log(product);
   };
 
   const { data: session } = useSession();
-
-  console.log(session);
 
   return (
     <div className={productStyles.card}>

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
-import strokeRight from '../../public/icons/Stroke-right.svg';
+import strokeRight from '../../public/icons/StrokeRight.svg';
 import home from '../../public/icons/Home.svg';
 import styles from '../styles/Breedcrumbs.module.css';
 import typography from '../styles/Typography.module.css';

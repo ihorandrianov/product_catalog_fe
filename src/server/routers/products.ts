@@ -28,6 +28,9 @@ export const productsRouter = router({
           orderBy: {
             price: 'desc',
           },
+          include: {
+            users: true,
+          },
         });
       }
 
@@ -36,6 +39,9 @@ export const productsRouter = router({
         take: limit,
         orderBy: {
           year: 'desc',
+        },
+        include: {
+          users: true,
         },
       });
     }),

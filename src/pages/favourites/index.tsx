@@ -1,73 +1,50 @@
-import React, { useState, useEffect } from "react";
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from '../../styles/Favourites.module.css'
-import { getFavouritesPhones } from '../../utils/trpc';
-import Header  from "../../components/Header";
-import { Footer } from "../../components/Footer";
-import { ProductCard } from "../../components/ProductCard";
-import Home from '../../../public/icons/Home.svg'
-import StrokeRight from "../../../public/icons/StrokeRight.svg"
+import styles from '../../styles/Favourites.module.css';
+import Header from '../../components/Header';
+import { Footer } from '../../components/Footer';
+import { ProductCard } from '../../components/ProductCard';
+import Home from '../../../public/icons/Home.svg';
+import StrokeRight from '../../../public/icons/StrokeRight.svg';
+import { trpc } from '../../utils/trpc';
+import { Breedcrumbs } from '../../components/Breedcrumbs';
 
 const Favourites: React.FC = () => {
-   const [phones, setPhones] = useState([]);
+  const { data: phones, isLoading } = trpc.favourites.favoritesRoute.useQuery();
 
-  async function loadFavouritesPhones(): Promise<any> {
-    const favourites = localStorage.getItem('favourites');
-
-    if (favourites) {
-      const responseFromServer = await getFavouritesPhones(favourites);
-
-      setPhones(responseFromServer);
-    }
+  if (isLoading) {
+    <p>Loading</p>;
   }
 
-  useEffect(() => {
-    void loadFavouritesPhones();
-  }, []);
-  
+  console.log(phones);
   return (
     <>
       <Header />
-        <div className={styles.main}>
-          <div className={styles.container}>
-            <div className={styles.nav}>
-              <Link
-                href="/"
-                className={styles.back}
-              >
-                <Image
-                  src={Home}
-                  className={styles.icon}
-                  alt='back'
-                />
-                <Image
-                  src={StrokeRight}
-                  className={styles.icon}
-                  alt='back'
-                />
-              </Link>
-            
-              <p className={styles.current}>
-                  Favourites
-              </p>
-            </div>
-            <h1 className={styles.header}>
-                Favourites
-            </h1>
+      <div className={styles.main}>
+        <div className={styles.container}>
+          <div className={styles.nav}>
+            <Breedcrumbs />
+          </div>
+          <h1 className={styles.header}>Favourites</h1>
 
-            <h3 className={styles.subHeader}>{phones.length} items</h3>
+          <h3 className={styles.subHeader}>{phones?.favorites.length} items</h3>
 
-            <div className={styles.products}>
-                {phones.map(phone => <ProductCard product={phone} />)}
-            </div>
+          <div className={styles.products}>
+            {phones &&
+              phones.favorites.map((phoneItem) => (
+                <ProductCard
+                  key={phoneItem.phone.phoneId}
+                  product={phoneItem.phone}
+                />
+              ))}
           </div>
         </div>
-        
-       <Footer />
-    </>
-  )
-};
+      </div>
 
+      <Footer />
+    </>
+  );
+};
 
 export default Favourites;

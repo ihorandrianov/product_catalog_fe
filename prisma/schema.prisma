@@ -55,7 +55,7 @@ model CartItem {
   user      User  @relation(fields: [userId], references: [id])
   phoneId   String
   phone    Phones @relation(fields: [phoneId], references: [phoneId])
-  quantity Int?
+  quantity Int
   assignedAt DateTime @default(now())
   
   @@id([userId, phoneId])

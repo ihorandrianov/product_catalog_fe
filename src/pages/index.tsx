@@ -5,7 +5,9 @@ import homeStyles from '../styles/Home.module.css';
 import { Footer } from '../components/Footer';
 import Head from 'next/head';
 import { Recomended } from '../components/Recomended';
+import ShopByCategory from '../components/ShopByCategory';
 import { HomePageTopSlider } from '../components/HomePageTopSlider';
+
 
 export default function Home() {
   return (
@@ -15,8 +17,7 @@ export default function Home() {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="description" content="Main page of NiceGadgets" />
       </Head>
-      <Header />
-      
+      <Header />     
       <div className={homeStyles.mainWrapper}>
         <h1 className={classNames(homeStyles.mainTitle, typography.h1)}>
           Welcome to Nice Gadgets store!

@@ -66,7 +66,7 @@ export default function Header() {
             <Link href="/favourites" className={styles.link__nav__menu}>
               <Image className={styles.img} src={Fav} alt="favourites" />
             </Link>
-            <Link href="/shopping" className={styles.link__nav__menu}>
+            <Link href="/cart" className={styles.link__nav__menu}>
               <Image className={styles.img} src={Shopping} alt="shopping" />
             </Link>
           </div>
@@ -110,7 +110,7 @@ export default function Header() {
             <Link href="/favourites" className={styles.link__nav}>
               <Image className={styles.img} src={Fav} alt="favourites" />
             </Link>
-            <Link href="/shopping" className={styles.link__nav}>
+            <Link href="/cart" className={styles.link__nav}>
               <Image className={styles.img} src={Shopping} alt="shopping" />
             </Link>
             <button
@@ -134,9 +134,20 @@ export default function Header() {
         )}
 
         <div className={styles.menu}>
+        {session ? (
           <button onClick={openMenu} className={styles.link__nav}>
-            <Image className={styles.img} src={Open} alt="shopping" />
+            <Image className={styles.img} src={Open} alt="menu-opener" />
           </button>
+        ): (
+          <button
+            style={{ marginRight: '10px' }}
+            onClick={() => signIn()}
+            className={styles.list__link}
+          >
+            Sign in
+          </button>
+          
+        )}
         </div>
       </header>
     </>

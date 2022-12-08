@@ -105,6 +105,10 @@
   margin-top: auto;
 }
 
+.signInLink:hover {
+  color: var(--color-secondary);
+}
+
 @media (max-width: 639px) {
   .content__nav {
     display: none;

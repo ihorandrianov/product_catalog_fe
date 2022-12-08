@@ -11,6 +11,8 @@ import { Breedcrumbs } from './Breedcrumbs';
 import { getIphoneColor } from '../utils/utilities';
 import { TechSpecs } from './TechSpecs';
 import { PhoneInfoAbout } from './PhoneInfoAbout';
+import { CartButton } from './CartButton';
+import { FavouriteButton } from './FavouriteButton';
 
 type Props = {
   phones: PhoneDetails[];
@@ -118,15 +120,13 @@ const PhoneInfo: FC<Props> = ({ phones }) => {
               {`$${selectPhone?.priceRegular}`}
             </div>
           </div>
-          <div className={infoStyles.cartButtonGroup}>
-            <button className={buttons.primaryButton}>Add to cart</button>
-            <button
-              className={classNames(
-                buttons.circleButton,
-                infoStyles.circleButtonInfo,
-              )}
-            ></button>
-          </div>
+          {selectPhone && (
+            <div className={infoStyles.cartButtonGroup}>
+              <CartButton id={selectPhone?.id} />
+              <FavouriteButton id={selectPhone?.id} />
+            </div>
+          )}
+
           <div>
             <ul className={infoStyles.specList}>
               <li className={infoStyles.listItem}>

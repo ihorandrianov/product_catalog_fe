@@ -3,13 +3,35 @@ import { z } from 'zod';
 import { prisma } from '../prisma';
 
 export const productsRouter = router({
-  getRecomended: procedure.query(async () => {
+  getRecomended: procedure.input(z.string()).query(async ({ input }) => {
+    let orderBy
+    switch (input) {
+      case "recomended":
+        orderBy = {
+          phoneId: 'desc'
+        };
+        break;
+    
+      case "new":
+        orderBy = {
+          year: 'desc'
+        };
+        break;
+      
+      case "hot":
+        orderBy = {
+          price: 'asc'
+        };
+        break;
+    }
     const items = await prisma.phones.findMany({
       take: 24,
+      orderBy,
     });
 
     return items;
   }),
+
   getSome: procedure
     .input(
       z.object({
@@ -28,6 +50,9 @@ export const productsRouter = router({
           orderBy: {
             price: 'desc',
           },
+          include: {
+            users: true,
+          },
         });
       }
 
@@ -36,6 +61,9 @@ export const productsRouter = router({
         take: limit,
         orderBy: {
           year: 'desc',
+        },
+        include: {
+          users: true,
         },
       });
     }),

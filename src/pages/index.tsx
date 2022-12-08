@@ -2,6 +2,7 @@ import Header from '../components/Header';
 import { Footer } from '../components/Footer';
 import Head from 'next/head';
 import { Recomended } from '../components/Recomended';
+import ShopByCategory from '../components/ShopByCategory';
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       </Head>
       <Header />
       <Recomended title="Brand new models" order="new" />
+      <ShopByCategory />
       <Recomended title="Hot prices" order="hot" />
       <Footer />
     </>

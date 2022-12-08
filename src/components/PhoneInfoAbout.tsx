@@ -3,7 +3,7 @@ import typography from '../styles/Typography.module.css';
 import classNames from 'classnames';
 import styles from '../styles/TechSpecs.module.css';
 import { PhoneDetails } from '@prisma/client';
-import info from '../styles/PhoneInfoAbout.module.css';
+import info from '../styles/phoneInfoAbout.module.css';
 
 type Props = {
   phone: PhoneDetails;

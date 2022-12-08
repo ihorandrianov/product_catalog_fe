@@ -13,4 +13,5 @@
 
 html {
   color: var(--color-primary);
+  background-color: var(--color-hover);
 }

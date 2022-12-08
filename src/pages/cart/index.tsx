@@ -1,26 +1,59 @@
-import { FC } from 'react';
+import { NextPage } from 'next';
+import Head from 'next/head';
+import Link from 'next/link';
+import Image from 'next/image';
+import { CartList } from '../../components/CartList';
+import { CartPrice } from '../../components/CartPrice';
+import back from '../../../public/icons/Stroke-left.svg';
+import fonts from '../../styles/Typography.module.css';
+import styles from '../../styles/CartPage.module.css';
 import { trpc } from '../../utils/trpc';
+import CartGrid from '../../components/CartPageLoader';
+import Header from '../../components/Header';
+import { Footer } from '../../components/Footer';
 
-const AddToCart: FC = () => {
-  const cartMutation = trpc.cart.addItem.useMutation();
-  const { data, isLoading } = trpc.cart.getCart.useQuery();
-  const handleClick = () => {
-    cartMutation.mutate({
-      id: 'apple-iphone-11-64gb-black',
-      quantity: 3,
-    });
-  };
+const CartPage: NextPage = () => {
+  const { data: phones, isLoading } = trpc.cart.cartRoute.useQuery();
 
   if (isLoading) {
-    return <>Loading</>;
+    return <CartGrid />;
   }
-
+  
   return (
     <>
-      <p>{JSON.stringify(data)}</p>
-      <button onClick={handleClick}>add to cart</button>
+      <Head>
+        <title>Cart</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+        <meta name="description" content="Cart"/>
+      </Head>
+
+      <Header />
+
+      <div className={styles.container}>
+        <button className={styles.button}>
+          <Image src={back} className={styles.back} alt="back" />
+
+          <Link href="/" className={`${styles.back} ${fonts.buttons}`}>
+            Back
+          </Link>
+        </button>
+
+        <h1 className={`${styles.header} ${fonts.h1}`}>Cart</h1>
+
+        <div className={styles.cart}>
+            <CartList
+              products={phones?.cart}
+            />
+
+            <CartPrice
+              products={phones?.cart}
+            />
+        </div>
+      </div>
+
+      <Footer />
     </>
   );
 };
 
-export default AddToCart;
+export default CartPage;

@@ -134,9 +134,20 @@ export default function Header() {
         )}
 
         <div className={styles.menu}>
+        {session ? (
           <button onClick={openMenu} className={styles.link__nav}>
-            <Image className={styles.img} src={Open} alt="shopping" />
+            <Image className={styles.img} src={Open} alt="menu-opener" />
           </button>
+        ): (
+          <button
+            style={{ marginRight: '10px' }}
+            onClick={() => signIn()}
+            className={styles.list__link}
+          >
+            Sign in
+          </button>
+          
+        )}
         </div>
       </header>
     </>

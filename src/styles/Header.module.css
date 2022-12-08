@@ -82,6 +82,9 @@
 .list__link {
   text-transform: uppercase;
   color: #89939A;
+  padding-bottom: 3px;
+  border-bottom: 2px solid;
+  border-color: transparent;
   transition: color 0.5s;
 }
 

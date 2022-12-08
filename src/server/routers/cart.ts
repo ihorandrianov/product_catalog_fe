@@ -13,15 +13,13 @@ export const cartRouter = router({
         cart: {
           include: {
             phone: true,
-          }
-        }
-      }
-    })
+          },
+        },
+      },
+    });
 
     return cart;
   }),
-
-  
 
   addNewItem: protectedProcedure
     .input(z.string())
@@ -33,8 +31,8 @@ export const cartRouter = router({
           userId: id,
           phoneId: input,
           quantity: 1,
-        }
-      })
+        },
+      });
     }),
 
   updatePlus: protectedProcedure
@@ -52,8 +50,8 @@ export const cartRouter = router({
         data: {
           quantity: {
             increment: 1,
-          }
-        }
+          },
+        },
       });
     }),
 
@@ -72,8 +70,8 @@ export const cartRouter = router({
         data: {
           quantity: {
             decrement: 1,
-          }
-        }
+          },
+        },
       });
     }),
 
@@ -89,6 +87,22 @@ export const cartRouter = router({
             phoneId: input,
           },
         },
-      })
-    })
+      });
+    }),
+  isAdded: protectedProcedure
+    .input(z.string())
+    .query(async ({ ctx, input }) => {
+      const id = ctx.session.user.id;
+
+      const founded = await prisma.cartItem.findUnique({
+        where: {
+          userId_phoneId: {
+            userId: id,
+            phoneId: input,
+          },
+        },
+      });
+
+      return founded ? true : false;
+    }),
 });

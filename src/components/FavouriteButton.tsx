@@ -1,27 +1,25 @@
-import { FC } from "react";
-import { trpc } from "../utils/trpc";
+import { FC } from 'react';
+import { trpc } from '../utils/trpc';
 import styles from '../styles/FavouriteButton.module.css';
 
 type Props = {
-  id: string,
-  favorite: boolean,
-  setFavorite: (type: boolean) => void;
-}
+  id: string;
+};
 
-export const FavouriteButton: FC<Props> = ({ id, favorite, setFavorite }) => {
+export const FavouriteButton: FC<Props> = ({ id }) => {
   const utils = trpc.useContext();
   const deleteMutation = trpc.favourites.removeFavorite.useMutation({
     onSettled: () => {
-      utils.invalidate()
-    }
+      utils.invalidate();
+    },
   });
 
   const addMutation = trpc.favourites.addNewFavorite.useMutation({
     onSettled: () => {
-      utils.invalidate()
-    }
+      utils.invalidate();
+    },
   });
-  
+
   const { data, isLoading } = trpc.favourites.getFav.useQuery(id);
 
   const handleAdd = (phoneId: string) => {
@@ -36,12 +34,15 @@ export const FavouriteButton: FC<Props> = ({ id, favorite, setFavorite }) => {
     <button
       aria-label="add to favorites"
       onClick={() => {
-        setFavorite(!favorite);
-        {!data ? handleAdd(id) : handleDelete(id)}
-
+        {
+          !data ? handleAdd(id) : handleDelete(id);
+        }
       }}
-      className={data ? `${styles.card__favoritesIconActive}` : `${styles.card__favoritesIcon}`}
-    >
-    </button>
+      className={
+        data
+          ? `${styles.card__favoritesIconActive}`
+          : `${styles.card__favoritesIcon}`
+      }
+    ></button>
   );
 };

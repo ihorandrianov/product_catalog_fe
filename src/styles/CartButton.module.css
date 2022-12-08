@@ -22,7 +22,7 @@
   box-shadow: 0px 3px 13px rgba(23, 32, 49, 0.4);
 }
 
-.card__addToCart:active {
+.card__addToCartActive {
   background: var(--color-white);
   color: var(--color-buttons);
   background-color: var(--color-elements);

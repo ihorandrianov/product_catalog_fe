@@ -1,0 +1,62 @@
+.pageButton {
+  border-radius: 50%;
+  border: 1px solid #e2e6e9;
+  color: #0f0f11;
+  background-color: #e2e6e9;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition-duration: 500ms;
+  transition-property: scale;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.navButton {
+  border-radius: 50%;
+  border: 1px solid #b4bdc4;
+  color: #0f0f11;
+  background-color: #e2e6e9;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition-duration: 500ms;
+  transition-property: scale;
+  margin: 0 18px;
+}
+
+.navButton:disabled {
+  scale: 80%;
+  cursor: not-allowed;
+}
+
+.pageButton:hover {
+  scale: 110%;
+}
+
+.selectedButton {
+  background: #0f0f11;
+  color: #e2e6e9;
+  border-radius: 50%;
+  border: 1px solid #e2e6e9;
+  padding: 2px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.buttonsWrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+  margin: 5px;
+}

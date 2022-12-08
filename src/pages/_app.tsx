@@ -1,8 +1,10 @@
 import '../styles/globals.css';
-import type { AppProps } from 'next/app';
-import 'bulma/css/bulma.css';
+import '../styles/reset.css';
+import type { AppProps, AppType } from 'next/app';
 import { trpc } from '../utils/trpc';
 import localFont from '@next/font/local';
+import { SessionProvider } from 'next-auth/react';
+import { Session } from 'next-auth';
 
 const mont = localFont({
   src: [
@@ -24,12 +26,17 @@ const mont = localFont({
   ],
 });
 
-function App({ Component, pageProps }: AppProps) {
+const App: AppType<{ session: Session | null }> = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}) => {
   return (
     <main className={mont.className}>
-      <Component {...pageProps} />
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
     </main>
   );
-}
+};
 
 export default trpc.withTRPC(App);

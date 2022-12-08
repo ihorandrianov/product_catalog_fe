@@ -3,43 +3,76 @@ import { z } from 'zod';
 import { prisma } from '../prisma';
 
 export const productsRouter = router({
-  getAll: procedure
+  getRecomended: procedure.input(z.string()).query(async ({ input }) => {
+    let orderBy
+    switch (input) {
+      case "recomended":
+        orderBy = {
+          phoneId: 'desc'
+        };
+        break;
+    
+      case "new":
+        orderBy = {
+          year: 'desc'
+        };
+        break;
+      
+      case "hot":
+        orderBy = {
+          price: 'asc'
+        };
+        break;
+    }
+    const items = await prisma.phones.findMany({
+      take: 24,
+      orderBy,
+    });
+
+    return items;
+  }),
+
+  getSome: procedure
     .input(
       z.object({
-        limit: z.number().min(1).max(10).nullish(),
-        cursor: z.number().nullish(),
+        limit: z.number().min(8).max(24),
+        page: z.number().min(0),
+        sortBy: z.string(),
       }),
     )
     .query(async ({ input }) => {
-      const limit = input.limit ?? 5;
-      const { cursor } = input;
+      const { limit, page, sortBy } = input;
 
-      const items = await prisma.phones.findMany({
-        take: limit + 1,
-        where: {},
-        cursor: cursor
-          ? {
-              id: cursor,
-            }
-          : undefined,
-        orderBy: {
-          id: 'asc',
-        },
-      });
-      let nextCursor: typeof cursor | undefined = undefined;
-      if (items.length > limit) {
-        const nextItem = items.pop();
-        nextCursor = nextItem?.id;
+      if (sortBy === 'price') {
+        return await prisma.phones.findMany({
+          skip: limit * page,
+          take: limit,
+          orderBy: {
+            price: 'desc',
+          },
+          include: {
+            users: true,
+          },
+        });
       }
 
-      return {
-        items,
-        nextCursor,
-      };
+      return await prisma.phones.findMany({
+        skip: limit * page,
+        take: limit,
+        orderBy: {
+          year: 'desc',
+        },
+        include: {
+          users: true,
+        },
+      });
     }),
-  getSome: procedure.query(async () => {
-    return await prisma.phones.findMany({
-      take: 10,
+
+  countItems: procedure.query(async () => {
+    return await prisma.phones.count({
+      select: {
+        _all: true,
+      },
     });
   }),
 });

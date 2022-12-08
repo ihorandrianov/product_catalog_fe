@@ -1,12 +1,27 @@
-import { NextPage } from 'next';
-import { SampleComponent } from '../../components/SampleComponent';
+import Head from 'next/head';
+import { Footer } from '../../components/Footer';
+import Header from '../../components/Header';
+import { PaginationPage } from '../../components/PaginationPage';
 
-const Phones: NextPage = () => {
+function Phones({}) {
   return (
-    <div>
-      <SampleComponent />
-    </div>
+    <>
+      <Head>
+        <title>Phones</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="description" content="Phones catalog" />
+      </Head>
+      <Header />
+      <PaginationPage />
+      <Footer />
+    </>
   );
-};
+}
+
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
+}
 
 export default Phones;

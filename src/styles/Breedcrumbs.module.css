@@ -1,0 +1,27 @@
+.list {
+  display: flex;
+  gap: 14px;
+  padding: 24px 0;
+  align-items: center;
+  height: 24px;
+  margin-bottom: 41px;
+}
+
+.lastChild {
+  color: var(--color-secondary);
+}
+
+.stroke {
+  margin-right: 12px;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  margin-bottom: -3px;
+  text-transform: capitalize;
+  text-align: center;
+}

@@ -15,12 +15,13 @@ type Description = {
 };
 
 export const PhoneInfoAbout: React.FC<Props> = ({ phone }) => {
+  const description: Description[] = phone.description as never;
   return (
     <article>
       <h1 className={classNames(typography.h3, styles.title)}>About</h1>
       <div className={styles.divider}></div>
       {phone &&
-        phone.description.map((description) => (
+        description.map((description) => (
           <div key={description?.title} className={info.position}>
             <h3 className={info.infoTitle}>{description?.title}</h3>
             <div className={info.infoAbout}>{description?.text}</div>

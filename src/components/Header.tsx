@@ -37,7 +37,7 @@ export default function Header() {
   return (
     <>
       {isOpen && (
-        <main className={styles.menu__page}>
+        <div className={styles.menu__page}>
           <div className={styles.header__menu}>
             <Link href="#home" className={styles.link__img}>
               <Image className={styles.img__logo} src={Logo} alt="Logo" />
@@ -83,10 +83,10 @@ export default function Header() {
               <Image className={styles.img} src={Shopping} alt="shopping" />
             </Link>
           </div>
-        </main>
+        </div>
       )}
 
-      <header className={styles.header}>
+      <header id="header" className={styles.header}>
         <Link href="/" className={styles.link__img}>
           <Image className={styles.img__logo} src={Logo} alt="Logo" />
         </Link>
@@ -147,20 +147,19 @@ export default function Header() {
         )}
 
         <div className={styles.menu}>
-        {session ? (
-          <button onClick={openMenu} className={styles.link__nav}>
-            <Image className={styles.img} src={Open} alt="menu-opener" />
-          </button>
-        ): (
-          <button
-            style={{ marginRight: '10px' }}
-            onClick={() => signIn()}
-            className={styles.list__link}
-          >
-            Sign in
-          </button>
-          
-        )}
+          {session ? (
+            <button onClick={openMenu} className={styles.link__nav}>
+              <Image className={styles.img} src={Open} alt="menu-opener" />
+            </button>
+          ) : (
+            <button
+              style={{ marginRight: '10px' }}
+              onClick={() => signIn()}
+              className={styles.list__link}
+            >
+              Sign in
+            </button>
+          )}
         </div>
       </header>
     </>

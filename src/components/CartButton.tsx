@@ -8,7 +8,7 @@ type Props = {
   id: string;
 };
 
-export const CartButton: FC<Props> = ({ id, added, setAdded }) => {
+export const CartButton: FC<Props> = ({ id }) => {
   const utils = trpc.useContext();
   const deleteMutation = trpc.cart.deleteItem.useMutation({
     onSettled: () => {

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { trpc } from '../utils/trpc';
 import styles from '../styles/FavouriteButton.module.css';
+import classNames from 'classnames';
 
 type Props = {
   id: string;
@@ -38,11 +39,10 @@ export const FavouriteButton: FC<Props> = ({ id }) => {
           !data ? handleAdd(id) : handleDelete(id);
         }
       }}
-      className={
-        data
-          ? `${styles.card__favoritesIconActive}`
-          : `${styles.card__favoritesIcon}`
-      }
+      className={classNames(
+        data && styles.card__favoritesIconActive,
+        styles.card__favoritesIcon,
+      )}
     ></button>
   );
 };

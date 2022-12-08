@@ -16,6 +16,10 @@ html {
   background-color: var(--color-hover);
 }
 
+* {
+  scroll-behavior: smooth;
+}
+
 @media (min-width: 640px) {
   .mainTitle {
     font-size: 48px;
@@ -58,7 +62,7 @@ html {
 
 .swiper-button-prev::after,
 .swiper-button-next::after {
-  content: "" !important;
+  content: '' !important;
 }
 
 @media (min-width: 640px) {
@@ -94,8 +98,8 @@ html {
     left: 50%;
     width: 5px;
     height: 10px;
-    background: url("../../public/icons/promo-slider-arrow.svg")
-      center/contain no-repeat;
+    background: url('../../public/icons/promo-slider-arrow.svg') center/contain
+      no-repeat;
   }
 
   .swiper-button-prev {

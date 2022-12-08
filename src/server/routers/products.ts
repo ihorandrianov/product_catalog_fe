@@ -4,30 +4,35 @@ import { prisma } from '../prisma';
 
 export const productsRouter = router({
   getRecomended: procedure.input(z.string()).query(async ({ input }) => {
-    let orderBy
+    let items;
     switch (input) {
-      case "recomended":
-        orderBy = {
-          phoneId: 'desc'
-        };
+      case 'recomended':
+        items = await prisma.phones.findMany({
+          take: 24,
+          orderBy: {
+            phoneId: 'desc',
+          },
+        });
         break;
-    
-      case "new":
-        orderBy = {
-          year: 'desc'
-        };
+
+      case 'new':
+        items = await prisma.phones.findMany({
+          take: 24,
+          orderBy: {
+            year: 'desc',
+          },
+        });
         break;
-      
-      case "hot":
-        orderBy = {
-          price: 'asc'
-        };
+
+      default:
+        items = await prisma.phones.findMany({
+          take: 24,
+          orderBy: {
+            price: 'asc',
+          },
+        });
         break;
     }
-    const items = await prisma.phones.findMany({
-      take: 24,
-      orderBy,
-    });
 
     return items;
   }),

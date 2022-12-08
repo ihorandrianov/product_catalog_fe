@@ -26,8 +26,6 @@ export const ProductCard: FC<Props> = ({ product }) => {
     console.log(product);
   };
 
-  const { data: session } = useSession();
-
   const addMutation = trpc.cart.addNewItem.useMutation();
 
   const handleAdd = (phoneId: string) => {

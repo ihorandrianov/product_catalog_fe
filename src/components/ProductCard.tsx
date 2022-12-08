@@ -8,6 +8,8 @@ import Link from 'next/link';
 import { getPhoneRoute } from '../utils/utilities';
 import { trpc } from '../utils/trpc';
 import { useSession } from 'next-auth/react';
+import { CartButton } from './CartButton';
+import { FavouriteButton } from './FavouriteButton';
 
 type Props = {
   product: Phones;
@@ -25,6 +27,12 @@ export const ProductCard: FC<Props> = ({ product }) => {
   };
 
   const { data: session } = useSession();
+
+  const addMutation = trpc.cart.addNewItem.useMutation();
+
+  const handleAdd = (phoneId: string) => {
+    addMutation.mutate(phoneId);
+  };
 
   return (
     <div className={productStyles.card}>
@@ -125,27 +133,17 @@ export const ProductCard: FC<Props> = ({ product }) => {
       </div>
 
       <div className={productStyles.card__buy}>
-        <button
-          onClick={() => {
-            setAdded(!added);
-          }}
-          className={classNames(`${productStyles.card__addToCart}`, 'buttons', {
-            card__addToCartActive: added,
-          })}
-        >
-          {added ? 'Added' : 'Add to cart'}
-        </button>
+        <CartButton 
+          id={product.phoneId}
+          added={added}
+          setAdded={setAdded}
+        />
 
-        <button
-          aria-label="add to favorites"
-          onClick={() => {
-            setFavorite(!favorite);
-            addFavorite(product.phoneId);
-          }}
-          className={classNames(`${productStyles.card__favoritesIcon}`, {
-            card__favoritesIconActive: favorite,
-          })}
-        ></button>
+        <FavouriteButton 
+          id={product.phoneId}
+          favorite={favorite}
+          setFavorite={setFavorite}
+        />
       </div>
     </div>
   );

@@ -9,9 +9,11 @@ import fonts from '../../styles/Typography.module.css';
 import styles from '../../styles/CartPage.module.css';
 import { trpc } from '../../utils/trpc';
 import CartGrid from '../../components/CartPageLoader';
+import Header from '../../components/Header';
+import { Footer } from '../../components/Footer';
 
-export const CartPage: NextPage = () => {
-  const { isLoading } = trpc.products.getAll.useQuery();
+const CartPage: NextPage = () => {
+  const { data: phones, isLoading } = trpc.cart.cartRoute.useQuery();
 
   if (isLoading) {
     return <CartGrid />;
@@ -25,6 +27,8 @@ export const CartPage: NextPage = () => {
         <meta name="description" content="Cart"/>
       </Head>
 
+      <Header />
+
       <div className={styles.container}>
         <button className={styles.button}>
           <Image src={back} className={styles.back} alt="back" />
@@ -37,11 +41,19 @@ export const CartPage: NextPage = () => {
         <h1 className={`${styles.header} ${fonts.h1}`}>Cart</h1>
 
         <div className={styles.cart}>
-          <CartList />
+            <CartList
+              products={phones?.cart}
+            />
 
-          <CartPrice />
+            <CartPrice
+              products={phones?.cart}
+            />
         </div>
       </div>
+
+      <Footer />
     </>
   );
 };
+
+export default CartPage;

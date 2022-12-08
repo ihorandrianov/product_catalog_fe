@@ -1,0 +1,28 @@
+.card__favoritesIcon {
+  height: 40px;
+  width: 40px;
+  background-image: url(../../public/img/fav-regular.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid transparent;
+  border-radius: 48px;
+
+  transition-duration: 500ms;
+}
+
+.card__favoritesIcon:hover {
+  border-color: #000;
+}
+
+.card__favoritesIconActive {
+  height: 40px;
+  width: 40px;
+  background-image: url(../../public/img/fav-selected.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}

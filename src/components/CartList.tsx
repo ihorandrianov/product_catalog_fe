@@ -1,18 +1,27 @@
 import { FC } from 'react';
 import { trpc } from '../utils/trpc';
 import styles from '../styles/CartList.module.css';
-import { CartItem } from './CartItem';
+import { CartProductItem } from './CartProductItem';
+import { CartItem, Phones } from "@prisma/client";
 
-export const CartList: FC = () => {
-  const { data } = trpc.products.getAll.useQuery();
+type Props = {
+  products: (CartItem & {
+    phone: Phones;
+  })[] | undefined;
+}
 
+export const CartList: FC<Props> = ({ products }) => {
   return (
     <ul className={styles.list}>
-      {data?.items.map(phone => (
-        <li key={phone.phoneId}>
-          <CartItem phone={phone} />
-        </li>
-      ))}
+      {products &&
+        products.map(phoneItem => (
+          <li key={phoneItem.phone.phoneId}>
+            <CartProductItem
+              product={phoneItem.phone}
+              quantity={phoneItem.quantity}
+            />
+          </li>
+        ))}
     </ul>
   );
 }

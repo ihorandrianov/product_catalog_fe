@@ -11,33 +11,35 @@ import { trpc } from '../../utils/trpc';
 import CartGrid from '../../components/CartPageLoader';
 import Header from '../../components/Header';
 import { Footer } from '../../components/Footer';
+import { Breedcrumbs } from '../../components/Breedcrumbs';
 
 const CartPage: NextPage = () => {
   const { data: phones, isLoading } = trpc.cart.cartRoute.useQuery();
 
   if (isLoading) {
     return (
-    <>
-      <Header />
+      <>
+        <Header />
 
-      <CartGrid />
+        <CartGrid />
 
-      <Footer />
-    </>
+        <Footer />
+      </>
     );
   }
-  
+
   return (
     <>
       <Head>
         <title>Cart</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
-        <meta name="description" content="Cart"/>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="description" content="Cart" />
       </Head>
 
       <Header />
 
       <div className={styles.container}>
+        <Breedcrumbs />
         <button className={styles.button}>
           <Image src={back} className={styles.back} alt="back" />
 
@@ -49,16 +51,13 @@ const CartPage: NextPage = () => {
         <h1 className={`${styles.header} ${fonts.h1}`}>Cart</h1>
 
         <div className={styles.cart}>
-            <CartList
-              products={phones?.cart}
-            />
-
-            {phones?.cart &&
-            <CartPrice
-              products={phones?.cart}
-            />
-            }
-            
+          <CartList products={phones?.cart} />
+          {!phones?.cart.length && (
+            <div>
+              <p>No items yet!</p>
+            </div>
+          )}
+          {phones?.cart && <CartPrice products={phones?.cart} />}
         </div>
       </div>
 

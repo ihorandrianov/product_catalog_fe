@@ -11,7 +11,7 @@
 
   border: 1px solid transparent;
   border-radius: 48px;
-
+  transition-property: color;
   transition-duration: 500ms;
 }
 

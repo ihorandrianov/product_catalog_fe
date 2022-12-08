@@ -1,11 +1,11 @@
 .card {
   box-sizing: border-box;
-  padding: 32px;
+  padding: 20px;
   width: 272px;
   height: 506px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   background-color: #fff;
   border: 1px solid #e2e6e9;
   box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.1);
@@ -48,6 +48,7 @@
 .card__features {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
 }
 
 .card__features::before {
@@ -87,4 +88,5 @@
   display: flex;
   justify-content: space-between;
   gap: 8px;
+  justify-self: bottom;
 }

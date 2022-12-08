@@ -21,6 +21,19 @@ export default function Header() {
     setIsOpen(false);
   };
 
+  const logOut = () => {
+    signOut({
+      redirect: true,
+      callbackUrl: '/',
+    });
+  };
+
+  const logIn = () => {
+    signIn('github')
+      .then((value) => console.log(value))
+      .catch((e) => console.log(e));
+  };
+
   return (
     <>
       {isOpen && (
@@ -115,7 +128,7 @@ export default function Header() {
             </Link>
             <button
               style={{ marginRight: '10px' }}
-              onClick={() => signOut()}
+              onClick={() => logOut()}
               className={styles.list__link}
             >
               Log out
@@ -125,7 +138,7 @@ export default function Header() {
           <div className={styles.content__link}>
             <button
               style={{ marginRight: '10px' }}
-              onClick={() => signIn()}
+              onClick={() => logIn()}
               className={styles.list__link}
             >
               Sign in

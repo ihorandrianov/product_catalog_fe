@@ -16,20 +16,6 @@ type Props = {
 };
 
 export const ProductCard: FC<Props> = ({ product }) => {
-  const [added, setAdded] = useState(false);
-  const [favorite, setFavorite] = useState(false);
-
-  const addFavoriteMutation = trpc.favourites.addNewFavorite.useMutation();
-
-  const addFavorite = (phoneId: string) => {
-    addFavoriteMutation.mutate(phoneId);
-    console.log(product);
-  };
-
-  const handleAdd = (phoneId: string) => {
-    addFavoriteMutation.mutate(phoneId);
-  };
-
   return (
     <div className={productStyles.card}>
       <Link
@@ -129,17 +115,8 @@ export const ProductCard: FC<Props> = ({ product }) => {
       </div>
 
       <div className={productStyles.card__buy}>
-        <CartButton 
-          id={product.phoneId}
-          added={added}
-          setAdded={setAdded}
-        />
-
-        <FavouriteButton 
-          id={product.phoneId}
-          favorite={favorite}
-          setFavorite={setFavorite}
-        />
+        <CartButton id={product.phoneId} />
+        <FavouriteButton id={product.phoneId} />
       </div>
     </div>
   );

@@ -1,46 +1,92 @@
 import { z } from 'zod';
+import { prisma } from '../prisma';
 import { protectedProcedure, router } from '../trpc';
 
 export const cartRouter = router({
-  addItem: protectedProcedure
-    .input(
-      z.object({
-        id: z.string(),
-        quantity: z.number(),
-      }),
-    )
-    .mutation(async ({ input, ctx }) => {
-      const id = ctx.session.user.id;
-      const cart = await ctx.prisma.cart.create({
-        data: {
-          userId: id,
-          cartItems: {
-            create: [
-              {
-                itemId: input.id,
-                quantity: input.quantity,
-              },
-            ],
-          },
-        },
-      });
-      return cart;
-    }),
-  getCart: protectedProcedure.query(async ({ ctx }) => {
+  cartRoute: protectedProcedure.query(async ({ ctx }) => {
     const id = ctx.session.user.id;
-    const cart = ctx.prisma.cart.findFirst({
+    const cart = await prisma.user.findUnique({
       where: {
-        userId: id,
+        id,
       },
       include: {
-        cartItems: {
+        cart: {
           include: {
-            item: true,
-          },
-        },
-      },
-    });
+            phone: true,
+          }
+        }
+      }
+    })
 
     return cart;
   }),
+
+  addNewItem: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      const id = ctx.session.user.id;
+
+      await prisma.cartItem.create({
+        data: {
+          userId: id,
+          phoneId: input,
+          quantity: 1,
+        }
+      })
+    }),
+
+  updatePlus: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      const id = ctx.session.user.id;
+
+      await prisma.cartItem.update({
+        where: {
+          userId_phoneId: {
+            userId: id,
+            phoneId: input,
+          },
+        },
+        data: {
+          quantity: {
+            increment: 1,
+          }
+        }
+      });
+    }),
+
+  updateMinus: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      const id = ctx.session.user.id;
+
+      await prisma.cartItem.update({
+        where: {
+          userId_phoneId: {
+            userId: id,
+            phoneId: input,
+          },
+        },
+        data: {
+          quantity: {
+            decrement: 1,
+          }
+        }
+      });
+    }),
+
+  deleteItem: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      const id = ctx.session.user.id;
+
+      await prisma.cartItem.delete({
+        where: {
+          userId_phoneId: {
+            userId: id,
+            phoneId: input,
+          },
+        },
+      })
+    })
 });

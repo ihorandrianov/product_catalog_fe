@@ -8,20 +8,29 @@ import close from '../../public/icons/CloseGrey.svg';
 import minus from '../../public/icons/Minus.svg';
 import plus from '../../public/icons/Plus.svg';
 import { getPhoneRoute } from "../utils/utilities";
+import { trpc } from '../utils/trpc';
 
 type Props = {
-  phone: Phones;
+  product: Phones;
+  quantity: number;
 };
 
-export const CartItem: FC<Props> = ({ phone }) => {
-  // const myStorage = window.localStorage;
-  // localStorage.setItem('item1', "apple-iphone-7-32gb-black");
-  // localStorage.setItem('item2', "apple-iphone-7-plus-32gb-black");
-  
-  // console.log(myStorage);
-  
-  // const LC = "apple-iphone-7-32gb-black";
-  // const query = trpc.products.getAllFromLS.useQuery({ myStorage });
+export const CartProductItem: FC<Props> = ({ product, quantity }) => {
+  const minusMutation = trpc.cart.updateMinus.useMutation();
+  const plusMutation = trpc.cart.updatePlus.useMutation();
+  const deleteMutation = trpc.cart.deleteItem.useMutation();
+
+  const handleMinus = (phoneId: string) => {
+    minusMutation.mutate(phoneId);
+  };
+
+  const handlePlus = (phoneId: string) => {
+    plusMutation.mutate(phoneId);
+  };
+
+  const handleDelete = (phoneId: string) => {
+    deleteMutation.mutate(phoneId);
+  };
 
   return (
     <div className={styles.item}>
@@ -29,6 +38,7 @@ export const CartItem: FC<Props> = ({ phone }) => {
         <button 
           type='button' 
           className={styles.button_close}
+          onClick={() => {handleDelete(product.phoneId)}}
         >
           <Image
             className={styles.close}
@@ -39,7 +49,7 @@ export const CartItem: FC<Props> = ({ phone }) => {
 
         <Image
           className={styles.image}
-          src={`/${phone.image}`}
+          src={`/${product.image}`}
           height={66}
           width={66}
           alt="phone"
@@ -49,11 +59,11 @@ export const CartItem: FC<Props> = ({ phone }) => {
           <Link 
             href={{
               pathname: '/phones/[id]',
-              query: getPhoneRoute(phone.phoneId),
+              query: getPhoneRoute(product.phoneId),
             }}
             className={fonts.bodyText}
           >
-            {phone.name}
+            {product.name}
           </Link>
         </div>
       </div>
@@ -63,7 +73,7 @@ export const CartItem: FC<Props> = ({ phone }) => {
           <button 
             type='button' 
             className={styles.button}
-            disabled
+            onClick={() => {handleMinus(product.phoneId)}}
           >
             <Image 
               className={styles.button_image}
@@ -72,11 +82,14 @@ export const CartItem: FC<Props> = ({ phone }) => {
             />
           </button>
 
-          <p className={fonts.bodyText}>1</p>
+          <p className={fonts.bodyText}>
+            {quantity}
+          </p>
 
           <button 
             type='button' 
             className={styles.button}
+            onClick={() => {handlePlus(product.phoneId)}}
           >
             <Image 
               className={styles.button_image}
@@ -87,7 +100,7 @@ export const CartItem: FC<Props> = ({ phone }) => {
         </div>
 
         <p className={`${styles.price} ${fonts.h3}`}>
-          {`$${phone.price}`}
+          {`$${product.price}`}
         </p>
       </div>
     </div>

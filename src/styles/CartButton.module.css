@@ -1,0 +1,30 @@
+.card__addToCart {
+  width: full;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+
+  color: var(--color-white);
+
+  background: var(--color-accent);
+
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 48px;
+  text-align: center;
+
+  transition-duration: 500ms;
+}
+
+.card__addToCart:hover {
+  box-shadow: 0px 3px 13px rgba(23, 32, 49, 0.4);
+}
+
+.card__addToCart:active {
+  background: var(--color-white);
+  color: var(--color-buttons);
+  background-color: var(--color-elements);
+  border-color: #e2e6e9;
+}

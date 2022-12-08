@@ -16,7 +16,13 @@ export const FavouriteButton: FC<Props> = ({ id, favorite, setFavorite }) => {
     }
   });
 
-  const addMutation = trpc.favourites.addNewFavorite.useMutation();
+  const addMutation = trpc.favourites.addNewFavorite.useMutation({
+    onSettled: () => {
+      utils.invalidate()
+    }
+  });
+  
+  const { data, isLoading } = trpc.favourites.getFav.useQuery(id);
 
   const handleAdd = (phoneId: string) => {
     addMutation.mutate(phoneId);
@@ -31,10 +37,10 @@ export const FavouriteButton: FC<Props> = ({ id, favorite, setFavorite }) => {
       aria-label="add to favorites"
       onClick={() => {
         setFavorite(!favorite);
-        {!favorite ? handleAdd(id) : handleDelete(id)}
+        {!data ? handleAdd(id) : handleDelete(id)}
 
       }}
-      className={favorite ? `${styles.card__favoritesIconActive}` : `${styles.card__favoritesIcon}`}
+      className={data ? `${styles.card__favoritesIconActive}` : `${styles.card__favoritesIcon}`}
     >
     </button>
   );

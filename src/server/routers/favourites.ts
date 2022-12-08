@@ -60,8 +60,8 @@ export const favouritesRouter = router({
     .input(z.string())
     .query(async ({ ctx, input }) => {
         const id = ctx.session.user.id;
-        
-        await prisma.userFavorites.findUnique({
+
+        const founded = await prisma.userFavorites.findUnique({
             where: {
                 userId_phoneId: {
                     userId: id,
@@ -69,5 +69,7 @@ export const favouritesRouter = router({
                 },  
             }
         });
+        
+        return founded ? true : false;
     }),
 });

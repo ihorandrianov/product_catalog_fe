@@ -16,7 +16,15 @@ const CartPage: NextPage = () => {
   const { data: phones, isLoading } = trpc.cart.cartRoute.useQuery();
 
   if (isLoading) {
-    return <CartGrid />;
+    return (
+    <>
+      <Header />
+
+      <CartGrid />
+
+      <Footer />
+    </>
+    );
   }
   
   return (
@@ -45,9 +53,12 @@ const CartPage: NextPage = () => {
               products={phones?.cart}
             />
 
+            {phones?.cart &&
             <CartPrice
               products={phones?.cart}
             />
+            }
+            
         </div>
       </div>
 

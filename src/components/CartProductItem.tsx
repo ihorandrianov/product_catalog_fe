@@ -16,9 +16,23 @@ type Props = {
 };
 
 export const CartProductItem: FC<Props> = ({ product, quantity }) => {
-  const minusMutation = trpc.cart.updateMinus.useMutation();
-  const plusMutation = trpc.cart.updatePlus.useMutation();
-  const deleteMutation = trpc.cart.deleteItem.useMutation();
+  const qty = Math.max(1, quantity);
+  const utils = trpc.useContext();
+  const minusMutation = trpc.cart.updateMinus.useMutation({
+    onSettled: () => {
+      utils.invalidate()
+    }
+  });
+  const plusMutation = trpc.cart.updatePlus.useMutation({
+    onSettled: () => {
+      utils.invalidate()
+    }
+  });
+  const deleteMutation = trpc.cart.deleteItem.useMutation({
+    onSettled: () => {
+      utils.invalidate()
+    }
+  });
 
   const handleMinus = (phoneId: string) => {
     minusMutation.mutate(phoneId);
@@ -32,10 +46,13 @@ export const CartProductItem: FC<Props> = ({ product, quantity }) => {
     deleteMutation.mutate(phoneId);
   };
 
+  console.log(typeof quantity);
+
   return (
     <div className={styles.item}>
       <div className={styles.item_about}>
-        <button 
+        <button
+          aria-label="delete item"
           type='button' 
           className={styles.button_close}
           onClick={() => {handleDelete(product.phoneId)}}
@@ -70,8 +87,10 @@ export const CartProductItem: FC<Props> = ({ product, quantity }) => {
 
       <div className={styles.item_price}>
         <div className={styles.button_container}>
-          <button 
-            type='button' 
+          <button
+            aria-label="decrease quantity"
+            type='button'
+            disabled={quantity === 1}
             className={styles.button}
             onClick={() => {handleMinus(product.phoneId)}}
           >
@@ -83,10 +102,11 @@ export const CartProductItem: FC<Props> = ({ product, quantity }) => {
           </button>
 
           <p className={fonts.bodyText}>
-            {quantity}
+            {qty}
           </p>
 
-          <button 
+          <button
+            aria-label="increase quantity"
             type='button' 
             className={styles.button}
             onClick={() => {handlePlus(product.phoneId)}}

@@ -7,13 +7,13 @@ import { CartItem, Phones } from "@prisma/client";
 type Props = {
   products: (CartItem & {
     phone: Phones;
-  })[] | undefined;
+  })[];
 }
 
 export const CartPrice: FC<Props> = ({ products }) => {
   const totalPrice = products
     .map(phoneItem => phoneItem.phone.price * phoneItem.quantity)
-    .reduce((acc, curr) => acc + curr);
+    .reduce((acc, curr) => acc + curr, 0);
 
   return (
     <div className={styles.price}>
@@ -22,7 +22,7 @@ export const CartPrice: FC<Props> = ({ products }) => {
       </p>
 
       <p className={`${styles.count} ${fonts.bodyText}`}>
-        {`Total for ${products.length} items`}
+        {`Total for ${products?.length} items`}
       </p>
 
       <div className={styles.button_container}>

@@ -26,10 +26,8 @@ export const ProductCard: FC<Props> = ({ product }) => {
     console.log(product);
   };
 
-  const addMutation = trpc.cart.addNewItem.useMutation();
-
   const handleAdd = (phoneId: string) => {
-    addMutation.mutate(phoneId);
+    addFavoriteMutation.mutate(phoneId);
   };
 
   return (

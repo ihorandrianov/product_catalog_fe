@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import { FC } from "react";
 import { trpc } from "../utils/trpc";
 import styles from '../styles/FavouriteButton.module.css';
@@ -32,7 +31,7 @@ export const FavouriteButton: FC<Props> = ({ id, favorite, setFavorite }) => {
       aria-label="add to favorites"
       onClick={() => {
         setFavorite(!favorite);
-        {favorite ? handleAdd(id) : handleDelete(id)}
+        {!favorite ? handleAdd(id) : handleDelete(id)}
 
       }}
       className={favorite ? `${styles.card__favoritesIconActive}` : `${styles.card__favoritesIcon}`}

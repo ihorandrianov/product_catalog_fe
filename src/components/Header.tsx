@@ -6,8 +6,10 @@ import Shopping from '../../public/img/header_img/shopping.svg';
 import Close from '../../public/img/header_img/close.svg';
 import Open from '../../public/img/header_img/menu.svg';
 import Link from 'next/link';
+import st from '../styles/Typography.module.css';
 import { useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import classNames from 'classnames';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -139,7 +141,7 @@ export default function Header() {
             <button
               style={{ marginRight: '10px' }}
               onClick={() => logIn()}
-              className={styles.signInLink}
+              className={classNames(st.bodyText, styles.signInLink)}
             >
               Sign in
             </button>
@@ -155,7 +157,7 @@ export default function Header() {
             <button
               style={{ marginRight: '10px' }}
               onClick={() => signIn()}
-              className={styles.signInLink}
+              className={classNames(st.bodyText, styles.signInLink)}
             >
               Sign in
             </button>

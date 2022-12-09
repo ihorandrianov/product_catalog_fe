@@ -105,6 +105,10 @@
   margin-top: auto;
 }
 
+.signInLink {
+  border: 1px solid transparent;
+}
+
 .signInLink:hover {
   color: var(--color-secondary);
 }

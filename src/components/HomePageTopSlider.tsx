@@ -29,7 +29,7 @@ export const HomePageTopSlider = () => {
         spaceBetween={16}
         pagination={{
           clickable: true,
-          el: `${tss.swiperCustomPagination}`,
+          el: '.swiper-custom-pagination',
         }}
       >
         <SwiperSlide>

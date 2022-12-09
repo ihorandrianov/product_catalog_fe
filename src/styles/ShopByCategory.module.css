@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 16px 56px;
+  padding: 0 16px;
 }
 .subtitle {
     font-family: 'Mont';
@@ -24,7 +24,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 24px 16px 64px;
+    padding: 24px 16px 0;
     gap: 32px;
 }
 .img {
@@ -50,6 +50,8 @@
 @media (min-width: 640px) {
     .box {
         flex-direction: row;
+        padding: 24px 24px 0;
+        gap: 16px;
     }
     .img {
         width: 187px;
@@ -57,6 +59,9 @@
     }
 }
 @media (min-width: 1200px) {
+    .box {
+      padding: 24px 32px 0;
+    }
     .img {
         width: 368px;
         height: 368px;

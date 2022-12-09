@@ -1,9 +1,6 @@
 .promoSlider {
+  padding-bottom: 32px;
   user-select: none;
-
-  @media (min-width: 640px) {
-    margin: 0;
-  }
 }
 
 .promoSlider__image {

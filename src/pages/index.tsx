@@ -24,6 +24,7 @@ export default function Home() {
         </h1>
         <HomePageTopSlider />
         <Recomended title="Brand new models" order="new" />
+        <ShopByCategory />
         <Recomended title="Hot prices" order="hot" />
       </div>
       <Footer />

@@ -131,7 +131,7 @@ export default function Header() {
             <button
               style={{ marginRight: '10px' }}
               onClick={() => logOut()}
-              className={styles.list__link}
+              className={classNames(styles.signInLink)}
             >
               Log out
             </button>
@@ -141,7 +141,7 @@ export default function Header() {
             <button
               style={{ marginRight: '10px' }}
               onClick={() => logIn()}
-              className={classNames(st.bodyText, styles.signInLink)}
+              className={classNames(styles.signInLink)}
             >
               Sign in
             </button>
@@ -157,7 +157,7 @@ export default function Header() {
             <button
               style={{ marginRight: '10px' }}
               onClick={() => signIn()}
-              className={classNames(st.bodyText, styles.signInLink)}
+              className={classNames(styles.signInLink)}
             >
               Sign in
             </button>

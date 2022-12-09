@@ -107,10 +107,13 @@
 
 .signInLink {
   border: 1px solid transparent;
+  text-transform: uppercase;
+  color: #89939a;
+  padding-bottom: 3px;
 }
 
 .signInLink:hover {
-  color: var(--color-secondary);
+  color: var(--color-primary);
 }
 
 @media (max-width: 639px) {
